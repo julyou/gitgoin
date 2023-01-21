@@ -1,10 +1,20 @@
 const express = require('express')
+const axios = require('axios')
+const dotenv = require('dotenv')
+const path = require("path");
 const app = express()
 const port = 3004;
+dotenv.config();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//     res.send('Hello World!')
+// })
+app.use(express.static(path.join(__dirname, "..", "frontend")));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "frontend", "public", "index.html"));
+});
+
 
 app.get("/auth", (req, res) => {
     // Store parameters in an object
@@ -12,7 +22,7 @@ app.get("/auth", (req, res) => {
         scope: "read:user",
         client_id: process.env.CLIENT_ID,
     };
-    
+
     // Convert parameters to a URL-encoded string
     const urlEncodedParams = new URLSearchParams(params).toString();
     res.redirect(`https://github.com/login/oauth/authorize?${urlEncodedParams}`);
