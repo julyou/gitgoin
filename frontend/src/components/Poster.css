@@ -1,0 +1,122 @@
+/* @import url(https://fonts.googleapis.com/css2?family=Ewert&family=Ultra); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Rye&display=swap');
+
+body {
+    background-image: url("https://dimmageiras.github.io/101-computing-wanted-poster-css-task/images/wood.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    color: #5C4033;
+    /* color: #291200; */
+    min-height: 41.15rem;
+}
+
+main {
+    color: #5C4033;
+    display: flex;
+    font-family: "Ultra", serif;
+    height: 100vh;
+    margin: auto .6rem;
+    min-height: 41.15rem;
+}
+
+
+h1 {
+    color: #5C4033;
+    font-family: "Rye";
+    font-size: 75px !important;
+    font-weight: normal;
+}
+
+em {
+    font-family: "Rye";
+    color: #5C4033;
+    font-size: 1rem;
+    margin: .7rem;
+}
+
+h2 {
+    font-family: "Rye";
+    color: #5C4033;
+    font-size: 15rem;
+    margin: .7rem auto .55rem auto;
+}
+
+/* 
+u {
+    font-size: 2rem;
+    text-decoration-line: underline;
+    text-decoration-style: double;
+} */
+
+line {
+    width: 
+}
+
+.poster {
+    background-image: url("https://dimmageiras.github.io/101-computing-wanted-poster-css-task/images/parchment.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: .125rem .25rem .5rem .1875rem #000;
+    box-sizing: border-box;
+    height: 38.75rem;
+    margin: 1.2rem auto;
+    padding-top: 1.7rem;
+    text-align: center;
+    width: 30rem;
+}
+
+.subheading {
+    font-size: 1.34rem;
+    margin: 1rem auto .48rem auto;
+}
+
+.mugshot {
+    background-image: url("https://dimmageiras.github.io/101-computing-wanted-poster-css-task/images/mugshot.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: .125rem solid #291200;
+    display: inline-block;
+    filter: sepia(60%);
+    height: 19.1rem;
+    opacity: .9;
+    padding: .625rem;
+    width: 17.5rem;
+}
+
+.name {
+    font-family: "Rye";
+    color: #5C4033;
+    font-size: 2rem;
+    margin: .7rem
+}
+
+.header-wanted {
+    font-size: 100px
+}
+
+@media only screen and (max-width: 30rem) {
+    body {
+        min-height: 35.025rem;
+        min-width: 100%;
+    }
+
+    main {
+        height: auto;
+        margin: 5.5rem auto;
+        min-height: 35.025rem;
+        width: auto;
+    }
+
+    .poster {
+        background-size: 20.438rem 32.625rem;
+        height: 32.625rem;
+        width: 20.438rem;
+    }
+
+    .mugshot {
+        height: 13.01rem;
+        width: 11.92rem;
+    }
+}

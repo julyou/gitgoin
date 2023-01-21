@@ -4,22 +4,17 @@ const dotenv = require('dotenv')
 const path = require("path");
 const app = express()
 const port = 3004;
-dotenv.config();
+dotenv.config({ path: `.env.local`, override: true });
 
 // app.get('/', (req, res) => {
 //     res.send('Hello World!')
 // })
-app.use(express.static(path.join(__dirname, "..", "frontend")));
-
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "frontend", "public", "index.html"));
-});
 
 
 app.get("/auth", (req, res) => {
     // Store parameters in an object
     const params = {
-        scope: "read:user",
+        scope: "read:user, repo",
         client_id: process.env.CLIENT_ID,
     };
 
@@ -44,8 +39,9 @@ app.get("/github-callback", (req, res) => {
         .post("https://github.com/login/oauth/access_token", body, options)
         .then((response) => response.data.access_token)
         .then((token) => {
-            accessToken = token;
-            res.redirect(`/?token=${token}`);
+            // res.json({ accessToken: token });
+            res.redirect(`http://localhost:3000/dashboard?token=${token}`);
+            // console.log(token)
         })
         .catch((err) => res.status(500).json({ err: err.message }));
 });
