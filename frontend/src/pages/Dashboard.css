@@ -51,6 +51,22 @@
         blink-caret .75s step-end infinite;
 }
 
+.typewriter-long {
+    overflow: hidden;
+    /* Ensures the content is not revealed until the animation */
+    border-right: 0.15em solid gray;
+    /* The typwriter cursor */
+    white-space: nowrap;
+    /* Keeps the content on a single line */
+    margin: 0 auto;
+    letter-spacing: .15em;
+    /* Adjust as needed */
+    animation:
+        typing 4s steps(20, end),
+        blink-caret .75s step-end infinite;
+}
+
+
 .remove-cursor {
     border-right: none;
 }

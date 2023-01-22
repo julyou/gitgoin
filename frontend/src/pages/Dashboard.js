@@ -218,18 +218,23 @@ const Dashboard = () => {
                 </Flex>
 
                 {done ?
-                    < Flex className={style ? "" : "grid"} direction="column" p="0px" gap="10px" >
-                        {goodIssues.issues.map((item, i) => {
-                            const duration = 3500; // ms
-                            const delay = 550; // ms
-                            const animStr = (i) => `fadeIn ${duration}ms ease-out ${delay * i}ms backwards`;
-                            return (<Poster key={item.url} animation={animStr(i)} western={style} repoName={item.name} topics={style ? item.topics : item.topics.slice(0, 7)} repoUrl={item.url} title={item.title} score={item.score} />);
+                    <>
+                        <Flex>
+                            <Text className="typewriter-long">These issues were recommended based on your profile:</Text>
+                        </Flex>
+                        < Flex className={style ? "" : "grid"} direction="column" p="0px" gap="10px" >
+                            {goodIssues.issues.map((item, i) => {
+                                const duration = 3500; // ms
+                                const delay = 550; // ms
+                                const animStr = (i) => `fadeIn ${duration}ms ease-out ${delay * i}ms backwards`;
+                                return (<Poster key={item.url} animation={animStr(i)} western={style} repoName={item.name} topics={style ? item.topics : item.topics.slice(0, 7)} repoUrl={item.url} title={item.title} score={item.score} />);
 
-                        })}
-                        {/* <Poster repoName={goodIssues.issues[0].name} topics={goodIssues.topics[0]} repoUrl={goodIssues.issues[0].url} title={goodIssues.issues[0].title} />
-                        <Poster repoName={goodIssues.issues[1].name} topics={goodIssues.topics[1]} repoUrl={goodIssues.issues[1].url} title={goodIssues.issues[1].title} />
-                        <Poster repoName={goodIssues.issues[2].name} topics={goodIssues.topics[2]} repoUrl={goodIssues.issues[2].url} title={goodIssues.issues[2].title} /> */}
-                    </Flex>
+                            })}
+                            {/* <Poster repoName={goodIssues.issues[0].name} topics={goodIssues.topics[0]} repoUrl={goodIssues.issues[0].url} title={goodIssues.issues[0].title} />
+                            <Poster repoName={goodIssues.issues[1].name} topics={goodIssues.topics[1]} repoUrl={goodIssues.issues[1].url} title={goodIssues.issues[1].title} />
+                            <Poster repoName={goodIssues.issues[2].name} topics={goodIssues.topics[2]} repoUrl={goodIssues.issues[2].url} title={goodIssues.issues[2].title} /> */}
+                        </Flex>
+                    </>
                     : null}
             </Flex >
         </Box>
