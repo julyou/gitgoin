@@ -5,9 +5,10 @@ const Topic = (props) => {
     return (
         <Flex>
             <Tag
-                bg="#5C4033"
-                color="#ebceb7"
+                bg="#edf2f8"
+                color="gray"
                 fontSize='10px'
+                fontFamily='-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;'
                 padding={1.8}
                 paddingRight={3}
                 paddingLeft={3}

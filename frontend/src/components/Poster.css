@@ -8,7 +8,7 @@ body {
     /* background-image: url("https://c1.wallpaperflare.com/preview/907/581/284/backdrop-background-blank-board.jpg"); */
     /* background-image: url("https://images.unsplash.com/photo-1581281863883-2469417a1668?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z29yaWxsYXxlbnwwfHwwfHw%3D&w=1000&q=80"); */
     /* background-image: url("https://freevector-images.s3.amazonaws.com/uploads/vector/preview/41144/FreeVectorCowboy_Background_in_the_Desert_WW0422_generated.jpg"); */
-    
+
     /* background-image: url("https://i.pinimg.com/originals/a1/33/bd/a133bdb6723cc29d4775d13070447c9e.jpg");  */
     /* filter: sepia(60%); */
     background-repeat: repeat;
@@ -137,8 +137,11 @@ h2 {
 }
 
 .box:hover {
+    /* background-color: #f0f3f5; */
     transform: scale(1.01);
-    cursor: pointer;
+    border-radius: 25px;
+
+    /* cursor: pointer; */
 }
 
 .subheading {
@@ -184,6 +187,10 @@ h2 {
     scale: 1.3;
 }
 
+.buggy-no-bkg-2 {
+    width: 130px;
+}
+
 .name {
     font-family: "Noto Serif Toto";
     color: #5C4033;
@@ -219,5 +226,33 @@ h2 {
     .mugshot {
         height: 13.01rem;
         width: 11.92rem;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeOut {
+    animation: fadeOut 500ms ease-out forwards;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }

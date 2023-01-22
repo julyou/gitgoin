@@ -19,8 +19,24 @@
     gripGap: 20;  */
 }
 
-.typewriter {
+.typewriter-text {
+    /* overflow: hidden; */
+    /* overflow: hidden; */
+    /* Ensures the content is not revealed until the animation */
+    /* border-right: 0.15em solid gray; */
+    /* The typwriter cursor */
+    /* white-space: nowrap; */
+    /* Keeps the content on a single line */
+    /* margin: 0 auto; */
+    letter-spacing: .15em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    /* Adjust as needed
+    animation:
+        typing 2.4s steps(20, end),
+        blink-caret .75s step-end infinite; */
+}
 
+.typewriter {
     overflow: hidden;
     /* Ensures the content is not revealed until the animation */
     border-right: 0.15em solid gray;
@@ -33,6 +49,10 @@
     animation:
         typing 1.8s steps(20, end),
         blink-caret .75s step-end infinite;
+}
+
+.remove-cursor {
+    border-right: none;
 }
 
 /* The typing effect */
@@ -60,10 +80,10 @@
 
 @keyframes fadeIn {
     0% {
-      opacity: 0;
+        opacity: 0;
     }
-  
+
     100% {
-      opacity: 1;
+        opacity: 1;
     }
-  }
+}

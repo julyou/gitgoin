@@ -22,9 +22,9 @@ We used Express/Node.js for the backend and Github OAuth to generate a token to 
 A major challenge that we ran into was architecting the backend due to the sheer amount of data that we were working with (since we were querying a user's entire github data), but we were able to make it work thanks to async functions and caffeine. Google Cloud Platform was also difficult to work with as sometimes we were overloading the API and it would shut us down (but that's to be expected with GCP)
 
 ### What we learned
-Back-end development (express, node.js)
-Working with google cloud platform
-NLP/entity analysis
+- Back-end development (express, node.js)
+- Working with google cloud platform
+- NLP/entity analysis
 
 ### What's next for GitGoin'
 We want to improve the matching algorithm, and gamify the open-source contribution package (badges, awards, etc), but we're pretty proud of what we came up with in such a short amount of time!

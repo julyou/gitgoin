@@ -1,6 +1,6 @@
 import { React, useEffect } from 'react';
 import './Dashboard.css'
-import { Flex, Button, Spinner, Text, Box } from '@chakra-ui/react'
+import { Flex, Button, Spinner, Text, Box, Image } from '@chakra-ui/react'
 
 import axios from 'axios'
 
@@ -20,6 +20,7 @@ const Dashboard = () => {
     const [repoList, setRepoList] = useState({})
     const [goodIssues, setGoodIssues] = useState({})
     const [userData, setUser] = useState({})
+    const [lang, setLang] = useState("")
 
     const [style, setStyle] = useState(true)
 
@@ -59,6 +60,15 @@ const Dashboard = () => {
         console.log(user);
         console.log(repos);
 
+        let langs = repos.map(item => item.language);
+        langs = langs.filter(item => item); 
+        console.log("LANGS: ", langs);
+        const popLang = langs.sort((a, b) => langs.filter(v => v === a).length - langs.filter(v => v === b).length).pop();
+        console.log("POPLANG: ", popLang);
+
+        setUser(user);
+
+        setLang(popLang);
         const desc = repos.map((item) => item.description ? item.description : "");
         const readmes = [];
         for (let i = 0; i < repos.length; ++i) {
@@ -168,12 +178,11 @@ const Dashboard = () => {
         setDone(true);
     }
     return (
-
         <Box className={style ? "" : "cowboy"}>
-
+            <Navbar setState={setStyle} />
             <Flex align="center" direction="column" py="25px" gap="15px ">
-                <Navbar setState={setStyle} />
-                {done ? <Button onClick={handleClick} p="20px" position="sticky" top="0">
+                <Image className="buggy-no-bkg-2" src="https://i.ibb.co/28VcpKz/git-goin-2.png" />
+                {done ? <Button onClick={handleClick} p="20px" >
                     {loading ? <Text> Re-Analyze </Text> :
                         <Spinner
                             thickness='4px'
@@ -184,7 +193,6 @@ const Dashboard = () => {
                         />
                     }
                 </Button> :
-
                     <Button onClick={handleClick} p="20px">
                         {loading ? <Text> Analyze </Text> :
                             <Spinner
@@ -199,14 +207,23 @@ const Dashboard = () => {
                     </Button>
                 }
                 <Flex justifyContent="center">
-                    <Text className="typewriter">Hey! Welcome to GitGoin'</Text>
+                    <Text className={lang ? "typewriter remove-cursor" : "typewriter"}>Hey! Welcome to GitGoin'</Text>
+
+
                 </Flex>
+                <Flex justifyContent="center">
+                    {Object.keys(userData).length != 0 ?
+                        <Text className="typewriter">{lang}, eh?</Text>
+                        : null}
+                </Flex>
+
                 {done ?
                     < Flex className={style ? "" : "grid"} direction="column" p="0px" gap="10px" >
-                        {goodIssues.issues.map((item) => {
-                            const duration = 1000; // ms
-                            const delay = 500; // ms
-                            return (<Poster western={style} key={item.url} repoName={item.name} topics={style ? item.topics : item.topics.slice(0, 7)} repoUrl={item.url} title={item.title} score={item.score} />);
+                        {goodIssues.issues.map((item, i) => {
+                            const duration = 3500; // ms
+                            const delay = 550; // ms
+                            const animStr = (i) => `fadeIn ${duration}ms ease-out ${delay * i}ms backwards`;
+                            return (<Poster key={item.url} animation={animStr(i)} western={style} repoName={item.name} topics={style ? item.topics : item.topics.slice(0, 7)} repoUrl={item.url} title={item.title} score={item.score} />);
 
                         })}
                         {/* <Poster repoName={goodIssues.issues[0].name} topics={goodIssues.topics[0]} repoUrl={goodIssues.issues[0].url} title={goodIssues.issues[0].title} />
