@@ -6,7 +6,7 @@
 
 ### The Problem
 
-One of the best ways to learn when you're a new programmer is to contribute to open-source projects. However, one major problem that occurs is not knowing where to find the ones that you're best suitable to contribute to.
+One of the best ways to learn as a new programmer is to contribute to open-source projects. However, one major problem that occurs is not knowing where to find the ones that you're best suitable to contribute to.
 
 ### Our Solution
 

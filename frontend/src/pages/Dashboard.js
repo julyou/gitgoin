@@ -61,7 +61,7 @@ const Dashboard = () => {
         console.log(repos);
 
         let langs = repos.map(item => item.language);
-        langs = langs.filter(item => item); 
+        langs = langs.filter(item => item);
         console.log("LANGS: ", langs);
         const popLang = langs.sort((a, b) => langs.filter(v => v === a).length - langs.filter(v => v === b).length).pop();
         console.log("POPLANG: ", popLang);
@@ -194,7 +194,7 @@ const Dashboard = () => {
                     }
                 </Button> :
                     <Button onClick={handleClick} p="20px">
-                        {loading ? <Text> Analyze </Text> :
+                        {loading ? <Text> Analyze My Profile </Text> :
                             <Spinner
                                 thickness='4px'
                                 speed='0.65s'
