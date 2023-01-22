@@ -5,11 +5,17 @@ import { Flex, Button, Spinner, Text } from '@chakra-ui/react'
 import axios from 'axios'
 
 import { useState } from 'react'
+import Poster from '../components/Poster';
+
+// const language = require('@google-cloud/language');
 
 const Dashboard = () => {
 
     const [token, setToken] = useState("")
     const [loading, setLoading] = useState(true)
+    const [done, setDone] = useState(false)
+    const [repoList, setRepoList] = useState({})
+    const [goodIssues, setGoodIssues] = useState({})
 
 
     useEffect(() => {
@@ -45,22 +51,71 @@ const Dashboard = () => {
                 }
             }
         }
-        // setTimeout(2500) // REMOVE THIS LATER
         setLoading(prev => !prev)
         console.log(desc)
-        // axios
-        //     .get('https://api.github.com/user', requestAuthConfig)
-        //     .then((res) => {
-        //         setUsername(res.data.login);
-        //         console.log(res);
-        //         // res.login
-        //             axios
-        //             .get(`https://api.github.com/search/repositories\?q\=user:${res.data.login}`, requestAuthConfig)
-        //             .then((response) => {
-        //                 console.log(response);
-        //             })
-        //     })
+        const gfiSearch = await axios.get(`https://api.github.com/search/issues?q=maze+label:good-first-issue`, requestAuthConfig);
+        console.log(gfiSearch);
+        let gfiArray = [];
+        for (let i = 0; i < 3; ++i) {
+            const firstRepo = await axios.get(gfiSearch.data.items[i].repository_url, requestAuthConfig);
+            // console.log(labels[i].url);
+            const repoName = firstRepo.data.full_name;
+            // const labels = firstRepo.data.items[i].labels;
+            // console.log(labels[0].url);
+            //     console.log(repoName);
+            gfiArray.push(repoName);
+        }
+        // const labels = await axios.get(gfiSearch.data.items[0].labels, requestAuthConfig);
+
+        setGoodIssues({
+            issues: gfiArray
+        });
+        setDone(true);
+        // const projectId = 'YOUR_PROJECT_ID';
+
+        // const {Storage} = require('@google-cloud/storage');
+
+        // async function authenticateImplicitWithAdc() {
+        //   // This snippet demonstrates how to list buckets.
+        //   // NOTE: Replace the client created below with the client required for your application.
+        //   // Note that the credentials are not specified when constructing the client.
+        //   // The client library finds your credentials using ADC.
+        //   const storage = new Storage({
+        //     projectId,
+        //   });
+        //   const [buckets] = await storage.getBuckets();
+        //   console.log('Buckets:');
+
+        //   for (const bucket of buckets) {
+        //     console.log(`- ${bucket.name}`);
+        //   }
+
+        //   console.log('Listed all storage buckets.');
+        // }
+
+        // authenticateImplicitWithAdc();
+        // const language = require('@google-cloud/language');
+
+        // // Instantiates a client
+        // const client = new language.LanguageServiceClient();
+
+        // // The text to analyze
+        // const text = 'Hello, world!';
+
+        // const document = {
+        //   content: text,
+        //   type: 'PLAIN_TEXT',
+        // };
+
+        // // Detects the sentiment of the text
+        // const [result] = await client.analyzeSentiment({document: document});
+        // const sentiment = result.documentSentiment;
+
+        // console.log(`Text: ${text}`);
+        // console.log(`Sentiment score: ${sentiment.score}`);
+        // console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
     }
+
 
     return (
         <Flex h="100vh" justify="center" align="center">
@@ -74,11 +129,22 @@ const Dashboard = () => {
                         size='md'
                     />
                 }
+                {done ?
+                    <div>
+                        <Poster repoName={goodIssues.issues[0]} />
+                        <Poster repoName={goodIssues.issues[1]} />
+                        <Poster repoName={goodIssues.issues[2]} />
+                    </div>
+                    : null}
             </Button>
+
+
         </Flex>
 
 
+
     );
+
 }
 
 export default Dashboard;

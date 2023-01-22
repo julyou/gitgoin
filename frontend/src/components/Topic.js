@@ -4,7 +4,10 @@ import { defineStyle, defineStyleConfig } from '@chakra-ui/react';
 const Topic = () => {
     return (
         <Flex>
-            <Badge color='brown'>
+            <Badge
+                color='#ebceb7'
+                bg='#5C4033'
+            >
                 #TOPIC
             </Badge>
         </Flex >

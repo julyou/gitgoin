@@ -58,6 +58,9 @@ h2 {
 }
 
 .topics {
+    margin-top: 50%;
+    margin-left: 25%;
+    border: black; 
     position: center;
 }
 
