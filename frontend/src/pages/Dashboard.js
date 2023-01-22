@@ -1,11 +1,12 @@
 import { React, useEffect } from 'react';
-
+import './Dashboard.css'
 import { Flex, Button, Spinner, Text, Box } from '@chakra-ui/react'
 
 import axios from 'axios'
 
 import { useState } from 'react'
 import Poster from '../components/Poster';
+import Navbar from '../components/Navbar';
 
 // const language = require('@google-cloud/language');
 
@@ -146,7 +147,7 @@ const Dashboard = () => {
                 console.log(window.atob(issueReadMe.data.content));
                 // console.log(repoName);
                 // get repo topics 
-                const topics = repo.data.topics;
+                let topics = repo.data.topics;
                 gfiArray.push({
                     name: repoName,
                     url: gfiSearch2.data.items[i].html_url,
@@ -166,13 +167,14 @@ const Dashboard = () => {
         setDone(true);
     }
     return (
-        <Flex h="100vh" align="center" direction="column" py="25px">
-            <Button p="25px" onClick={() => setStyle(prev => !prev)}>
-                change style
-            </Button>
-            {done ? null :
-                <Button onClick={handleClick} p="20px">
-                    {loading ? <Text> Analyze </Text> :
+        <Box className={style ? "" : "cowboy"}>
+            <Navbar setState={setStyle} />
+            <Flex align="center" direction="column" py="25px" gap="15px">
+                <Button p="25px" onClick={() => setStyle(prev => !prev)}>
+                    change style
+                </Button>
+                {done ? <Button onClick={handleClick} p="20px">
+                    {loading ? <Text> Re-Analyze </Text> :
                         <Spinner
                             thickness='4px'
                             speed='0.65s'
@@ -181,20 +183,34 @@ const Dashboard = () => {
                             size='md'
                         />
                     }
-                </Button>
-            }
 
-            {done ?
-                < Flex direction="column" p="0px" gap="10px" >
-                    {goodIssues.issues.map((item) => {
-                        return (<Poster style={style} key={item.url} repoName={item.name} topics={item.topics} repoUrl={item.url} title={item.title} score={item.score} />);
-                    })}
-                    {/* <Poster repoName={goodIssues.issues[0].name} topics={goodIssues.topics[0]} repoUrl={goodIssues.issues[0].url} title={goodIssues.issues[0].title} />
+                </Button> :
+                    <Button onClick={handleClick} p="20px">
+                        {loading ? <Text> Analyze </Text> :
+                            <Spinner
+                                thickness='4px'
+                                speed='0.65s'
+                                emptyColor='gray.200'
+                                color='blue.500'
+                                size='md'
+                            />
+                        }
+
+                    </Button>
+                }
+
+                {done ?
+                    < Flex className={style ? "" : "grid"} direction="column" p="0px" gap="10px" >
+                        {goodIssues.issues.map((item) => {
+                            return (<Poster style={style} key={item.url} repoName={item.name} topics={style ? item.topics : item.topics.slice(0, 7)} repoUrl={item.url} title={item.title} score={item.score} />);
+                        })}
+                        {/* <Poster repoName={goodIssues.issues[0].name} topics={goodIssues.topics[0]} repoUrl={goodIssues.issues[0].url} title={goodIssues.issues[0].title} />
                         <Poster repoName={goodIssues.issues[1].name} topics={goodIssues.topics[1]} repoUrl={goodIssues.issues[1].url} title={goodIssues.issues[1].title} />
                         <Poster repoName={goodIssues.issues[2].name} topics={goodIssues.topics[2]} repoUrl={goodIssues.issues[2].url} title={goodIssues.issues[2].title} /> */}
-                </Flex>
-                : null}
-        </Flex >
+                    </Flex>
+                    : null}
+            </Flex >
+        </Box>
     );
 
 }

@@ -13,10 +13,10 @@ const Login = () => {
         <Flex justify="center" align="center" h="100vh">
             <Box h="500px" w="350px">
                 <Flex justify="center" align="center" border="1px" borderRadius="24px" direction="column" p="25px" gap="25px">
-                    <Flex fontSize="24px">
+                    {/* <Flex fontSize="24px">
                         Log In
-                    </Flex>
-                    <Image className="buggy-no-bkg" src="https://i.ibb.co/S6RjyXv/cowboy-bug.png" />
+                    </Flex> */}
+                    <Image className="buggy-no-bkg" src="https://i.ibb.co/28VcpKz/git-goin-2.png" />
                     <Button onClick={getAuth} >
                         <Flex gap="15px" justify="center" align="center">
                             <FaGithub size={20} />

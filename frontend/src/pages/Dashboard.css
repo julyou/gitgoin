@@ -1,0 +1,22 @@
+.cowboy {
+        /* background-image: url("https://c1.wallpaperflare.com/preview/907/581/284/backdrop-background-blank-board.jpg"); */
+    /* background-image: url("https://images.unsplash.com/photo-1581281863883-2469417a1668?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z29yaWxsYXxlbnwwfHwwfHw%3D&w=1000&q=80"); */
+    background-image: url("https://cdn.mos.cms.futurecdn.net/YdKowpCdGWSfSUYcENigAB-1200-80.jpg");
+    /* background-image: url("https://i.pinimg.com/originals/a1/33/bd/a133bdb6723cc29d4775d13070447c9e.jpg");  */
+    /* filter: sepia(60%); */
+    background-repeat: repeat;
+    background-size: cover;
+    /* color: #5C4033; */
+    /* color: #291200; */
+    min-height: 50rem;
+    background-attachment: fixed;
+}
+
+.grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    /* gridTemplateColumns: "repeat(3, 1fr)"; 
+    gripGap: 20;  */
+}
+
+
