@@ -62,7 +62,7 @@
     letter-spacing: .15em;
     /* Adjust as needed */
     animation:
-        typing 4s steps(20, end),
+        typing 3.2s steps(46, end),
         blink-caret .75s step-end infinite;
 }
 

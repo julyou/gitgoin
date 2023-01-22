@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 
 
 
-const Poster = ({ topics, repoName, repoUrl, title, score, western, animation, key }) => {
+const Poster = ({ topics, repoName, repoUrl, title, score, western, animation}) => {
     const clickHandler = () => {
         window.location.href = repoUrl;
     }
@@ -18,7 +18,7 @@ const Poster = ({ topics, repoName, repoUrl, title, score, western, animation, k
     const [fade, setFade ] = useState(false)
 
     useEffect(() => {
-    }, [key])
+    }, [])
 
 
     return (

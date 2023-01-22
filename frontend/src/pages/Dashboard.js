@@ -137,7 +137,12 @@ const Dashboard = () => {
             }
         }
         const string = selectedReadmes.join().replaceAll("\n", "");
-        const nlp = await getStuff(string);
+        let nlp;
+        try {
+            nlp = await getStuff(string);
+        } catch (err) {
+            console.log("something bad happened with Google Cloud");
+        }
         // console.log(nlp);
         const words = nlp.data[0].entities.map((item) => item.name);
 
@@ -224,7 +229,7 @@ const Dashboard = () => {
                 </Flex>
                 <Flex justifyContent="center">
                     {Object.keys(userData).length != 0 ?
-                        <Text className={done ? "typewriter remove-cursor" : "typewriter"}>{lang}, eh?</Text>
+                        <Text className={done ? "typewriter-long remove-cursor" : "typewriter-long"}>I see you're a fan of {lang}, good choice!</Text>
                         : null}
                 </Flex>
 
