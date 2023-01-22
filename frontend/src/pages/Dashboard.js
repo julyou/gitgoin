@@ -120,7 +120,14 @@ const Dashboard = () => {
         // });
 
         const selectedReadmes = [];
+        let iterations = 0;
+        let noData = false;
         while (selectedReadmes.length < 3) {
+            if (iterations >= 15 || readmes.length == 0) {
+                noData = true;
+                break;
+            }
+            iterations++;
             let random = readmes[Math.floor(Math.random() * readmes.length)];
             if (random != "") {
                 if (random.length > 500) {
@@ -141,7 +148,11 @@ const Dashboard = () => {
             const w = words[i].replaceAll("\s", "");
             let gfiSearch2;
             try {
-                gfiSearch2 = await axios.get(`https://api.github.com/search/issues?q=${w}+label:good-first-issue`, requestAuthConfig);
+                if (noData) {
+                    gfiSearch2 = await axios.get(`https://api.github.com/search/issues?q=label:good-first-issue`, requestAuthConfig);
+                } else {
+                    gfiSearch2 = await axios.get(`https://api.github.com/search/issues?q=${w}+label:good-first-issue`, requestAuthConfig);
+                }
             } catch (err) {
                 continue;
             }
@@ -213,7 +224,7 @@ const Dashboard = () => {
                 </Flex>
                 <Flex justifyContent="center">
                     {Object.keys(userData).length != 0 ?
-                        <Text className="typewriter">{lang}, eh?</Text>
+                        <Text className={done ? "typewriter remove-cursor" : "typewriter"}>{lang}, eh?</Text>
                         : null}
                 </Flex>
 
