@@ -1,5 +1,6 @@
 import React from 'react';
-import { Flex, Box, Button } from '@chakra-ui/react'
+import { Flex, Box, Button, Text } from '@chakra-ui/react'
+import { FaGithub } from 'react-icons/fa'
 
 const Login = () => {
 
@@ -14,8 +15,11 @@ const Login = () => {
                     <Flex fontSize="24px">
                         Log In
                     </Flex>
-                    <Button onClick={getAuth}>
-                        Login with Github
+                    <Button onClick={getAuth} >
+                        <Flex gap="15px" justify="center" align="center">
+                            <FaGithub size={20}/>
+                            <Text> Login with Github </Text>
+                        </Flex>
                     </Button>
                 </Flex>
             </Box>

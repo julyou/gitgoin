@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Rye&display=swap');
 
 body {
-    background-image: url("https://dimmageiras.github.io/101-computing-wanted-poster-css-task/images/wood.jpg");
+    /* background-image: url("https://dimmageiras.github.io/101-computing-wanted-poster-css-task/images/wood.jpg"); */
     background-repeat: repeat;
     background-size: cover;
     color: #5C4033;
@@ -23,7 +23,7 @@ main {
 h1 {
     color: #5C4033;
     font-family: "Rye";
-    font-size: 75px !important;
+    font-size: 60px !important;
     font-weight: normal;
 }
 
@@ -41,6 +41,26 @@ h2 {
     margin: .7rem auto .55rem auto;
 }
 
+.hr-line {
+    width: 80%;
+    position: center;
+    text-align: middle;
+    margin-left: 10%;
+    margin-right: 10%;
+    /* margin: 20px; */
+    border-bottom: 3px solid #5C4033;
+    /* transform: scaleX(5) scaleY(1); */
+}
+
+.hr-icon {
+    position: center;
+    top: 3px;
+}
+
+.topics {
+    position: center;
+}
+
 /* 
 u {
     font-size: 2rem;
@@ -48,9 +68,6 @@ u {
     text-decoration-style: double;
 } */
 
-line {
-    width: 
-}
 
 .poster {
     background-image: url("https://dimmageiras.github.io/101-computing-wanted-poster-css-task/images/parchment.jpg");
