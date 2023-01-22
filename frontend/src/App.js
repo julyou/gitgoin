@@ -1,4 +1,3 @@
-import Search from './components/Search'
 import Login from './pages/Login'
 import Analyze from './components/Analyze'
 import Dashboard from './pages/Dashboard'

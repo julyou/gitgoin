@@ -2,16 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Rye&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Toto:wght@600&family=Old+Standard+TT:wght@700&display=swap');
 
+
+
 body {
     /* background-image: url("https://c1.wallpaperflare.com/preview/907/581/284/backdrop-background-blank-board.jpg"); */
     /* background-image: url("https://images.unsplash.com/photo-1581281863883-2469417a1668?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z29yaWxsYXxlbnwwfHwwfHw%3D&w=1000&q=80"); */
     background-image: url("https://freevector-images.s3.amazonaws.com/uploads/vector/preview/41144/FreeVectorCowboy_Background_in_the_Desert_WW0422_generated.jpg");
     /* background-image: url("https://i.pinimg.com/originals/a1/33/bd/a133bdb6723cc29d4775d13070447c9e.jpg");  */
+    /* filter: sepia(60%); */
     background-repeat: repeat;
     background-size: cover;
     /* color: #5C4033; */
     /* color: #291200; */
-    min-height: 30rem;
+    min-height: 50rem;
     background-attachment: fixed;
 }
 
@@ -19,7 +22,7 @@ main {
     color: #5C4033;
     display: flex;
     font-family: "Ultra", serif;
-    height: 20vh;
+    height: 40vh;
     margin: auto .6rem;
     /* min-height: 20.15rem; */
 }
@@ -32,10 +35,11 @@ h1 {
 }
 
 em {
-    font-family: 'Old Standard TT', serif;
+    font-family: 'Noto Serif Toto', serif;
+    font-style: normal;
     color: #5C4033;
-    font-size: 1.5rem;
-    margin-top: 90%;
+    font-size: 17px;
+    margin-top: 80%;
 }
 
 h2 {
@@ -92,6 +96,7 @@ h2 {
 .topics {
     display: flex;
     flex-direction: row;
+    margin-top: 10%;
     margin-left: 10%;
     margin-right: 10%;
     /* align-content: space-around;  */
@@ -102,13 +107,13 @@ h2 {
 
 .poster {
     /* background-image: url("https://img.freepik.com/premium-photo/old-parchment-paper-texture-background-vintage-wallpaper_118047-11703.jpg?w=2000"); */
-    background-color: #ebd5b7;
+    background-color: #e9d7bd;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     /* box-shadow: .125rem .25rem .5rem .1875rem #000; */
     box-sizing: border-box;
-    height: 38.75rem;
+    height: 44rem;
     margin: 1rem auto;
     padding: "25px";
     text-align: center;
@@ -141,7 +146,7 @@ h2 {
     opacity: .9;
     /* padding: .3rem; */
     width: 17.5rem;
-    scale: 0.6;
+    scale: 0.8;
 }
 
 .buggy {
@@ -152,7 +157,18 @@ h2 {
     border: solid black 2px;
     /* filter: sepia(60%); */
     filter: opacity(50%);
-    scale: 0.6;
+    scale: 0.8;
+}
+
+.buggy-no-bkg {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50%;
+    height: auto;
+    /* border: solid black 2px; */
+    filter: sepia(100%);
+    filter: opacity(70%);
+    scale: 0.9;
 }
 
 .name {

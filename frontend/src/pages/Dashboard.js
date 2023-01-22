@@ -109,8 +109,11 @@ const Dashboard = () => {
 
         const selectedReadmes = [];
         while (selectedReadmes.length < 3) {
-            const random = readmes[Math.floor(Math.random() * readmes.length)];
+            let random = readmes[Math.floor(Math.random() * readmes.length)];
             if (random != "") {
+                if (random.length > 500) {
+                    random = random.substr(0, 500);
+                };
                 selectedReadmes.push(random);
             }
         }
@@ -119,7 +122,7 @@ const Dashboard = () => {
         // console.log(nlp);
         const words = nlp.data[0].entities.map((item) => item.name);
 
-        for (let i = 0; i < words.length; i++) {
+        for (let i = 0; i < words.length && i < 5; i++) {
             if (gfiArray.length >= 3) {
                 break;
             }
@@ -164,7 +167,7 @@ const Dashboard = () => {
     }
     return (
         <Flex h="100vh" align="center" direction="column" py="25px">
-            <Button p="25px"onClick={() => setStyle(prev => !prev)}>
+            <Button p="25px" onClick={() => setStyle(prev => !prev)}>
                 change style
             </Button>
             {done ? null :
@@ -182,7 +185,7 @@ const Dashboard = () => {
             }
 
             {done ?
-                < Flex border="1px" direction="column" p="0px" gap="10px" >
+                < Flex direction="column" p="0px" gap="10px" >
                     {goodIssues.issues.map((item) => {
                         return (<Poster style={style} key={item.url} repoName={item.name} topics={item.topics} repoUrl={item.url} title={item.title} score={item.score} />);
                     })}
