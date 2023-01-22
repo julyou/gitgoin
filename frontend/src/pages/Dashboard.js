@@ -1,6 +1,6 @@
 import { React, useEffect } from 'react';
 
-import { Flex, Button, Spinner, Text } from '@chakra-ui/react'
+import { Flex, Button, Spinner, Text, Box } from '@chakra-ui/react'
 
 import axios from 'axios'
 
@@ -8,6 +8,8 @@ import { useState } from 'react'
 import Poster from '../components/Poster';
 
 // const language = require('@google-cloud/language');
+
+// const getEntities = require("../../../cloud/index.js");
 
 const Dashboard = () => {
 
@@ -17,12 +19,28 @@ const Dashboard = () => {
     const [repoList, setRepoList] = useState({})
     const [goodIssues, setGoodIssues] = useState({})
 
+    const styles = {
+        background: {
+            height: 1356,
+            backgroundImage: `url(${"https://static.nationalgeographic.co.uk/files/styles/image_3200/public/mgattoni_cowboys_002_0z6a3316_def.jpg?w=1900&h=1267"})`
+        }
+    };
+
 
     useEffect(() => {
         const params = new URLSearchParams(document.location.search);
         let token = params.get('token');
         setToken(token);
     }, [])
+
+    const getStuff = async (text) => {
+        const result = await axios.get('http://localhost:3005/', {
+            headers: { "input": text }
+        })
+
+        console.log(result);
+    }
+
 
     const handleClick = async () => {
         setLoading(prev => !prev)
@@ -44,7 +62,7 @@ const Dashboard = () => {
             } else {
                 try {
                     const readme = await axios.get(`https://api.github.com/repos/${repos[i].owner.login}/${repos[i].name}/readme`, requestAuthConfig);
-                    console.log(window.atob(readme.data.content))
+                    // console.log(window.atob(readme.data.content))
                     readmes.push(window.atob(readme.data.content))
                 } catch (err) {
                     console.log("Error: ", err);
@@ -53,73 +71,47 @@ const Dashboard = () => {
         }
         setLoading(prev => !prev)
         console.log(desc)
-        const gfiSearch = await axios.get(`https://api.github.com/search/issues?q=maze+label:good-first-issue`, requestAuthConfig);
+        const gfiSearch = await axios.get(`https://api.github.com/search/issues?q=python+label:good-first-issue`, requestAuthConfig);
         console.log(gfiSearch);
-        let gfiArray = [];
-        for (let i = 0; i < 3; ++i) {
-            const firstRepo = await axios.get(gfiSearch.data.items[i].repository_url, requestAuthConfig);
-            // console.log(labels[i].url);
-            const repoName = firstRepo.data.full_name;
-            // const labels = firstRepo.data.items[i].labels;
-            // console.log(labels[0].url);
-            //     console.log(repoName);
-            gfiArray.push(repoName);
+        let gfiArray = []; // array of objects { name: name, url: url }
+        let topicArray = []; // array of topics 
+        for (let i = 0; i < gfiSearch.data.items.length && i < 3; i++) {
+            // get repo data 
+            const repo = await axios.get(gfiSearch.data.items[i].repository_url, requestAuthConfig);
+            console.log(repo);
+            // get repo name
+            const repoName = repo.data.full_name;
+            const owner = repo.data.owner.login;
+            const name = repo.data.name;
+            const issueReadMe = await axios.get(`https://api.github.com/repos/${owner}/${name}/readme`, requestAuthConfig);
+            console.log(window.atob(issueReadMe.data.content));
+            // console.log(repoName);
+            // get repo topics 
+            const topics = repo.data.topics;
+            // console.log(topics);
+            topicArray.push(topics);
+            gfiArray.push({
+                name: repoName,
+                url: gfiSearch.data.items[i].html_url,
+                title: gfiSearch.data.items[i].title,
+                topics: topics
+            });
         }
-        // const labels = await axios.get(gfiSearch.data.items[0].labels, requestAuthConfig);
 
         setGoodIssues({
-            issues: gfiArray
+            issues: gfiArray,
+            topics: topicArray
+
         });
+        const string = readmes[1].replaceAll('\n', "");
+        await getStuff(string);
         setDone(true);
-        // const projectId = 'YOUR_PROJECT_ID';
 
-        // const {Storage} = require('@google-cloud/storage');
-
-        // async function authenticateImplicitWithAdc() {
-        //   // This snippet demonstrates how to list buckets.
-        //   // NOTE: Replace the client created below with the client required for your application.
-        //   // Note that the credentials are not specified when constructing the client.
-        //   // The client library finds your credentials using ADC.
-        //   const storage = new Storage({
-        //     projectId,
-        //   });
-        //   const [buckets] = await storage.getBuckets();
-        //   console.log('Buckets:');
-
-        //   for (const bucket of buckets) {
-        //     console.log(`- ${bucket.name}`);
-        //   }
-
-        //   console.log('Listed all storage buckets.');
-        // }
-
-        // authenticateImplicitWithAdc();
-        // const language = require('@google-cloud/language');
-
-        // // Instantiates a client
-        // const client = new language.LanguageServiceClient();
-
-        // // The text to analyze
-        // const text = 'Hello, world!';
-
-        // const document = {
-        //   content: text,
-        //   type: 'PLAIN_TEXT',
-        // };
-
-        // // Detects the sentiment of the text
-        // const [result] = await client.analyzeSentiment({document: document});
-        // const sentiment = result.documentSentiment;
-
-        // console.log(`Text: ${text}`);
-        // console.log(`Sentiment score: ${sentiment.score}`);
-        // console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
     }
 
-
     return (
-        <Flex h="100vh" justify="center" align="center">
-            <Button onClick={handleClick} display="flex" gap="15px">
+        <Flex h="100vh" align="center" direction="column" py="25px">
+            <Button onClick={handleClick} p="20px">
                 {loading ? <Text> Analyze </Text> :
                     <Spinner
                         thickness='4px'
@@ -129,22 +121,26 @@ const Dashboard = () => {
                         size='md'
                     />
                 }
-                {done ?
-                    <div>
-                        <Poster repoName={goodIssues.issues[0]} />
-                        <Poster repoName={goodIssues.issues[1]} />
-                        <Poster repoName={goodIssues.issues[2]} />
-                    </div>
-                    : null}
             </Button>
-
-
-        </Flex>
-
-
-
+            {done ?
+                < Flex border="1px" direction="column" p="0px" gap="10px" >
+                    {goodIssues.issues.map((item) => {
+                        return (<Poster key={item.url} repoName={item.name} topics={item.topics} repoUrl={item.url} title={item.title} />);
+                    })}
+                    {/* <Poster repoName={goodIssues.issues[0].name} topics={goodIssues.topics[0]} repoUrl={goodIssues.issues[0].url} title={goodIssues.issues[0].title} />
+                        <Poster repoName={goodIssues.issues[1].name} topics={goodIssues.topics[1]} repoUrl={goodIssues.issues[1].url} title={goodIssues.issues[1].title} />
+                        <Poster repoName={goodIssues.issues[2].name} topics={goodIssues.topics[2]} repoUrl={goodIssues.issues[2].url} title={goodIssues.issues[2].title} /> */}
+                </Flex>
+                : null}
+        </Flex >
     );
 
 }
 
 export default Dashboard;
+// DO NOT REMOVE, THANKS
+/*
+{goodIssues.issues.map((item) => {
+    <Poster repoName={item.name} topics={item.topics} repoUrl={item.url} title={item.title}/>
+})}
+*/

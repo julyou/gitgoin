@@ -1,15 +1,19 @@
-import { Flex, Badge } from '@chakra-ui/react';
+import { Flex, Badge, Tag } from '@chakra-ui/react';
 import { defineStyle, defineStyleConfig } from '@chakra-ui/react';
 
-const Topic = () => {
+const Topic = (props) => {
     return (
         <Flex>
-            <Badge
-                color='#ebceb7'
-                bg='#5C4033'
+            <Tag
+                bg="#5C4033"
+                color="#ebceb7"
+                fontSize='10px'
+                padding={1.8}
+                paddingRight={3}
+                paddingLeft={3}
             >
-                #TOPIC
-            </Badge>
+                {props.topicName}
+            </Tag>
         </Flex >
 
     );

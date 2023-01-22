@@ -1,66 +1,65 @@
 import "./Poster.css"
 import Topic from "./Topic.js"
+import { Flex, Link, Text, Box, Image } from '@chakra-ui/react'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { FaGithub } from 'react-icons/fa'
+import bug from "../images/cowboy_bug.png"
 
 
-const Poster = (props) => {
+const Poster = ({ topics, repoName, repoUrl, title }) => {
+    const clickHandler = () => {
+        window.location.href = repoUrl;
+    }
     return (
-        <div className="poster">
-            <div className="hr-line"></div>
-            <FaGithub className="fa-3x" />
-            <h1 className="header-wanted">WANTED</h1>
-            <div className="hr-line"></div>
-            <div className="repo" role="img" aria-label="repo-img"></div>
-            <p className="name">{props.repoName}</p>
-            <em>Categories</em>
-            {/* needs a dynamic list of components  */}
-            <div className="topics">
-                <Topic />
-            </div>
+        <Box>
+            <Flex direction="row" border="1px" borderRadius="30px" w="800px" m="25px" p="27px" align="center">
+                {/* {image == null ? null : <Flex w="300px" justify="center" align="center" paddingBottom={["25px", "25px", "0px", "0px"]}>
+                        <Image w="auto" maxHeight="200px" borderRadius="30px" src={image} />
+                    </Flex>} */}
 
-            {/* <div class="BorderGrid-row">
-                <div class="BorderGrid-cell">
-                    <h2 class="h4 mb-3">Languages</h2>
-                    <div class="mb-2">
-                        <span data-view-component="true" class="Progress">
-                            <span style="background-color:#e34c26 !important;;width: 45.9%;" itemprop="keywords" aria-label="HTML 45.9" data-view-component="true" class="Progress-item color-bg-success-emphasis"></span>
-                            <span style="background-color:#563d7c !important;;width: 30.9%;" itemprop="keywords" aria-label="CSS 30.9" data-view-component="true" class="Progress-item color-bg-success-emphasis"></span>
-                            <span style="background-color:#f1e05a !important;;width: 23.2%;" itemprop="keywords" aria-label="JavaScript 23.2" data-view-component="true" class="Progress-item color-bg-success-emphasis"></span>
-                        </span></div>
-                    <ul class="list-style-none">
-                        <li class="d-inline">
-                            <span class="d-inline-flex flex-items-center flex-nowrap text-small mr-3">
-                                <svg style="color:#e34c26;" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-dot-fill mr-2">
-                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
-                                </svg>
-                                <span class="color-fg-default text-bold mr-1">HTML</span>
-                                <span>45.9%</span>
-                            </span>
-                        </li>
-                        <li class="d-inline">
-                            <span class="d-inline-flex flex-items-center flex-nowrap text-small mr-3">
-                                <svg style="color:#563d7c;" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-dot-fill mr-2">
-                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
-                                </svg>
-                                <span class="color-fg-default text-bold mr-1">CSS</span>
-                                <span>30.9%</span>
-                            </span>
-                        </li>
-                        <li class="d-inline">
-                            <span class="d-inline-flex flex-items-center flex-nowrap text-small mr-3">
-                                <svg style="color:#f1e05a;" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-dot-fill mr-2">
-                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
-                                </svg>
-                                <span class="color-fg-default text-bold mr-1">JavaScript</span>
-                                <span>23.2%</span>
-                            </span>
-                        </li>
-                    </ul>
+                <Flex direction="column" w="100%">
+                    <Text fontSize="21px" fontWeight="bold"> {title} <Link href={repoUrl} isExternal> <ExternalLinkIcon paddingBottom="5px" w={7} h={7} /> </Link> </Text>
+                    <Text fontSize="16px" lineHeight="25px" paddingTop="15px" fontWeight="medium"> {repoName} </Text>
+                    <Flex justify="row" paddingTop="10px" flexWrap="wrap"> {topics.map((item) => (<Flex key={item} fontSize = "16px" fontWeight="medium" border="2px" borderRadius="12px" p="5px" marginRight="10px" marginTop="5px" marginBottom="5px"> {item} </Flex>))} </Flex>
 
+                </Flex>
+            </Flex>
+
+            <Flex transform="scale(0.7)" onClick={clickHandler}>
+                <div className="poster">
+                    <div className="emblem">
+                        <div className="hr-line1"></div>
+                        <div>
+                            <FaGithub />
+                        </div>
+                        <div className="hr-line1"></div>
+                    </div>
+
+                    <h1 className="header-wanted">WANTED</h1>
+                    <div className="hr-line2"></div>
+                    <div className="repo" role="img" aria-label="repo-img"></div>
+                    <p className="name">{repoName}</p>
+
+                    <Image src={bug} />
+                    <em>{title}</em>
+                    <div className="topics">
+                        {topics.map((item) => <Topic key={item} topicName={item} />)}
+                    </div>
                 </div>
-            </div> */}
-        </div>
+            </Flex >
+        </Box >
     )
 }
+
+{/* <Flex direction="row" border="1px" borderRadius="30px" w="800px" m="25px" p="27px" align="center">
+
+<Flex direction="column" w="100%">
+    <Text fontSize="21px" fontWeight="bold"> {title} <Link href={repoUrl} isExternal> <ExternalLinkIcon paddingBottom="5px" w={7} h={7}/> </Link> </Text>
+    <Text fontSize="16px" lineHeight="25px" paddingTop="15px" fontWeight="medium"> {repoName} </Text>
+    <Flex justify="row" paddingTop="10px" flexWrap="wrap"> {topics.map((elem) => (<Flex fontSize="16px" fontWeight="medium" border="2px" color={textColor} borderColor={borderTech} bg={tech} borderRadius="12px" p="5px" marginRight="10px" marginTop="5px" marginBottom="5px"> {item} </Flex>))} </Flex>
+
+</Flex>
+</Flex> */}
+
 
 export default Poster; 

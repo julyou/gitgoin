@@ -1,37 +1,36 @@
 /* @import url(https://fonts.googleapis.com/css2?family=Ewert&family=Ultra); */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Rye&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@700&display=swap');
 body {
-    /* background-image: url("https://dimmageiras.github.io/101-computing-wanted-poster-css-task/images/wood.jpg"); */
+        
     background-repeat: repeat;
     background-size: cover;
     color: #5C4033;
     /* color: #291200; */
-    min-height: 41.15rem;
+    min-height: 20.15rem;
 }
 
 main {
     color: #5C4033;
     display: flex;
     font-family: "Ultra", serif;
-    height: 100vh;
+    height: 20vh;
     margin: auto .6rem;
-    min-height: 41.15rem;
+    /* min-height: 20.15rem; */
 }
-
 
 h1 {
     color: #5C4033;
     font-family: "Rye";
     font-size: 60px !important;
-    font-weight: normal;
+    /* font-weight: normal; */
 }
 
 em {
-    font-family: "Rye";
+    font-family: 'Old Standard TT', serif;
     color: #5C4033;
     font-size: 1rem;
-    margin: .7rem;
+    margin-top: 90%;
 }
 
 h2 {
@@ -41,12 +40,40 @@ h2 {
     margin: .7rem auto .55rem auto;
 }
 
-.hr-line {
+.icon {
+    margin-left: 46%; 
+    font-size: 5rem; 
+    color: #5C4033; 
+}
+
+.emblem {
+    display: flex; 
+    flex-direction: row; 
+    margin-left: 10%;
+    margin-right: 10%;
+    /* align-content: space-around;  */
+    gap: 10px; 
+}
+
+.hr-line1 {
+    width: 80%;
+    position: center;
+    text-align: middle;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
+    /* margin: 20px; */
+    border-bottom: 3px solid #5C4033;
+    /* transform: scaleX(5) scaleY(1); */
+}
+
+.hr-line2 {
     width: 80%;
     position: center;
     text-align: middle;
     margin-left: 10%;
     margin-right: 10%;
+    margin-top: 2%;
     /* margin: 20px; */
     border-bottom: 3px solid #5C4033;
     /* transform: scaleX(5) scaleY(1); */
@@ -58,32 +85,36 @@ h2 {
 }
 
 .topics {
-    margin-top: 50%;
-    margin-left: 25%;
-    border: black; 
-    position: center;
+    display: flex; 
+    flex-direction: row; 
+    margin-left: 10%;
+    margin-right: 10%;
+    /* align-content: space-around;  */
+    gap: 10px; 
+    margin-top: 50%; 
+    flex-wrap: wrap; 
 }
-
-/* 
-u {
-    font-size: 2rem;
-    text-decoration-line: underline;
-    text-decoration-style: double;
-} */
 
 
 .poster {
-    background-image: url("https://dimmageiras.github.io/101-computing-wanted-poster-css-task/images/parchment.jpg");
+    background-image: url("https://img.freepik.com/premium-photo/old-parchment-paper-texture-background-vintage-wallpaper_118047-11703.jpg?w=2000");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    box-shadow: .125rem .25rem .5rem .1875rem #000;
+    /* box-shadow: .125rem .25rem .5rem .1875rem #000; */
     box-sizing: border-box;
     height: 38.75rem;
-    margin: 1.2rem auto;
+    margin: 1rem auto;
     padding-top: 1.7rem;
     text-align: center;
     width: 30rem;
+    border-radius: 25px;
+    /* transform: scale(0.9); */
+}
+
+.poster:hover {
+    transform: scale(1.02);
+    cursor: pointer;
 }
 
 .subheading {
@@ -92,7 +123,7 @@ u {
 }
 
 .mugshot {
-    background-image: url("https://dimmageiras.github.io/101-computing-wanted-poster-css-task/images/mugshot.png");
+    background-image: url("https://www.canva.com/design/DAFYW6nie28/view");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -113,7 +144,7 @@ u {
 }
 
 .header-wanted {
-    font-size: 100px
+    font-size: 90px
 }
 
 @media only screen and (max-width: 30rem) {
