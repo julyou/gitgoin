@@ -1,5 +1,5 @@
 .cowboy {
-        /* background-image: url("https://c1.wallpaperflare.com/preview/907/581/284/backdrop-background-blank-board.jpg"); */
+    /* background-image: url("https://c1.wallpaperflare.com/preview/907/581/284/backdrop-background-blank-board.jpg"); */
     /* background-image: url("https://images.unsplash.com/photo-1581281863883-2469417a1668?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z29yaWxsYXxlbnwwfHwwfHw%3D&w=1000&q=80"); */
     background-image: url("https://cdn.mos.cms.futurecdn.net/YdKowpCdGWSfSUYcENigAB-1200-80.jpg");
     /* background-image: url("https://i.pinimg.com/originals/a1/33/bd/a133bdb6723cc29d4775d13070447c9e.jpg");  */
@@ -19,4 +19,51 @@
     gripGap: 20;  */
 }
 
+.typewriter {
 
+    overflow: hidden;
+    /* Ensures the content is not revealed until the animation */
+    border-right: 0.15em solid gray;
+    /* The typwriter cursor */
+    white-space: nowrap;
+    /* Keeps the content on a single line */
+    margin: 0 auto;
+    letter-spacing: .15em;
+    /* Adjust as needed */
+    animation:
+        typing 1.8s steps(20, end),
+        blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: gray;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }

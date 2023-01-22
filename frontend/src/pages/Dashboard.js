@@ -19,6 +19,7 @@ const Dashboard = () => {
     const [done, setDone] = useState(false)
     const [repoList, setRepoList] = useState({})
     const [goodIssues, setGoodIssues] = useState({})
+    const [userData, setUser] = useState({})
 
     const [style, setStyle] = useState(true)
 
@@ -167,13 +168,12 @@ const Dashboard = () => {
         setDone(true);
     }
     return (
+
         <Box className={style ? "" : "cowboy"}>
-            <Navbar setState={setStyle} />
-            <Flex align="center" direction="column" py="25px" gap="15px">
-                <Button p="25px" onClick={() => setStyle(prev => !prev)}>
-                    change style
-                </Button>
-                {done ? <Button onClick={handleClick} p="20px">
+
+            <Flex align="center" direction="column" py="25px" gap="15px ">
+                <Navbar setState={setStyle} />
+                {done ? <Button onClick={handleClick} p="20px" position="sticky" top="0">
                     {loading ? <Text> Re-Analyze </Text> :
                         <Spinner
                             thickness='4px'
@@ -183,8 +183,8 @@ const Dashboard = () => {
                             size='md'
                         />
                     }
-
                 </Button> :
+
                     <Button onClick={handleClick} p="20px">
                         {loading ? <Text> Analyze </Text> :
                             <Spinner
@@ -198,11 +198,16 @@ const Dashboard = () => {
 
                     </Button>
                 }
-
+                <Flex justifyContent="center">
+                    <Text className="typewriter">Hey! Welcome to GitGoin'</Text>
+                </Flex>
                 {done ?
                     < Flex className={style ? "" : "grid"} direction="column" p="0px" gap="10px" >
                         {goodIssues.issues.map((item) => {
-                            return (<Poster style={style} key={item.url} repoName={item.name} topics={style ? item.topics : item.topics.slice(0, 7)} repoUrl={item.url} title={item.title} score={item.score} />);
+                            const duration = 1000; // ms
+                            const delay = 500; // ms
+                            return (<Poster western={style} key={item.url} repoName={item.name} topics={style ? item.topics : item.topics.slice(0, 7)} repoUrl={item.url} title={item.title} score={item.score} />);
+
                         })}
                         {/* <Poster repoName={goodIssues.issues[0].name} topics={goodIssues.topics[0]} repoUrl={goodIssues.issues[0].url} title={goodIssues.issues[0].title} />
                         <Poster repoName={goodIssues.issues[1].name} topics={goodIssues.topics[1]} repoUrl={goodIssues.issues[1].url} title={goodIssues.issues[1].title} />

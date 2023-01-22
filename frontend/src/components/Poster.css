@@ -132,6 +132,15 @@ h2 {
     cursor: pointer;
 }
 
+.box {
+    transition: all .2s ease-in-out;
+}
+
+.box:hover {
+    transform: scale(1.01);
+    cursor: pointer;
+}
+
 .subheading {
     font-size: 1.34rem;
     margin: 1rem auto .48rem auto;
@@ -182,12 +191,6 @@ h2 {
     /* margin: .7rem */
     margin-left: 15%;
     margin-right: 15%;
-}
-
-.match {
-    font-family: "Noto Serif Toto";
-    color: #125e1f;
-    font-size: 19px;
 }
 
 .header-wanted {
