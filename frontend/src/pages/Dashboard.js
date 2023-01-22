@@ -19,6 +19,8 @@ const Dashboard = () => {
     const [repoList, setRepoList] = useState({})
     const [goodIssues, setGoodIssues] = useState({})
 
+    const [style, setStyle] = useState(true)
+
     const styles = {
         background: {
             height: 1356,
@@ -38,7 +40,8 @@ const Dashboard = () => {
             headers: { "input": text }
         })
 
-        console.log(result);
+        return result;
+
     }
 
 
@@ -69,63 +72,119 @@ const Dashboard = () => {
                 }
             }
         }
-        setLoading(prev => !prev)
+
         console.log(desc)
-        const gfiSearch = await axios.get(`https://api.github.com/search/issues?q=python+label:good-first-issue`, requestAuthConfig);
-        console.log(gfiSearch);
+        // const gfiSearch = await axios.get(`https://api.github.com/search/issues?q=python+label:good-first-issue`, requestAuthConfig);
+        // console.log(gfiSearch);
         let gfiArray = []; // array of objects { name: name, url: url }
         let topicArray = []; // array of topics 
-        for (let i = 0; i < gfiSearch.data.items.length && i < 3; i++) {
-            // get repo data 
-            const repo = await axios.get(gfiSearch.data.items[i].repository_url, requestAuthConfig);
-            console.log(repo);
-            // get repo name
-            const repoName = repo.data.full_name;
-            const owner = repo.data.owner.login;
-            const name = repo.data.name;
-            const issueReadMe = await axios.get(`https://api.github.com/repos/${owner}/${name}/readme`, requestAuthConfig);
-            console.log(window.atob(issueReadMe.data.content));
-            // console.log(repoName);
-            // get repo topics 
-            const topics = repo.data.topics;
-            // console.log(topics);
-            topicArray.push(topics);
-            gfiArray.push({
-                name: repoName,
-                url: gfiSearch.data.items[i].html_url,
-                title: gfiSearch.data.items[i].title,
-                topics: topics
-            });
+        // for (let i = 0; i < gfiSearch.data.items.length && i < 3; i++) {
+        //     // get repo data 
+        //     const repo = await axios.get(gfiSearch.data.items[i].repository_url, requestAuthConfig);
+        //     console.log(repo);
+        //     // get repo name
+        //     const repoName = repo.data.full_name;
+        //     const owner = repo.data.owner.login;
+        //     const name = repo.data.name;
+        //     const issueReadMe = await axios.get(`https://api.github.com/repos/${owner}/${name}/readme`, requestAuthConfig);
+        //     console.log(window.atob(issueReadMe.data.content));
+        //     // console.log(repoName);
+        //     // get repo topics 
+        //     const topics = repo.data.topics;
+        //     // console.log(topics);
+        //     topicArray.push(topics);
+        //     gfiArray.push({
+        //         name: repoName,
+        //         url: gfiSearch.data.items[i].html_url,
+        //         title: gfiSearch.data.items[i].title,
+        //         topics: topics
+        //     });
+        // }
+
+        // setGoodIssues({
+        //     issues: gfiArray,
+        //     topics: topicArray
+
+        // });
+
+        const selectedReadmes = [];
+        while (selectedReadmes.length < 3) {
+            const random = readmes[Math.floor(Math.random() * readmes.length)];
+            if (random != "") {
+                selectedReadmes.push(random);
+            }
+        }
+        const string = selectedReadmes.join().replaceAll("\n", "");
+        const nlp = await getStuff(string);
+        // console.log(nlp);
+        const words = nlp.data[0].entities.map((item) => item.name);
+
+        for (let i = 0; i < words.length; i++) {
+            if (gfiArray.length >= 3) {
+                break;
+            }
+            const w = words[i].replaceAll("\s", "");
+            let gfiSearch2;
+            try {
+                gfiSearch2 = await axios.get(`https://api.github.com/search/issues?q=${w}+label:good-first-issue`, requestAuthConfig);
+            } catch (err) {
+                continue;
+            }
+
+            for (let i = 0; i < gfiSearch2.data.items.length && i < 6; i++) {
+                // get repo data 
+                const repo = await axios.get(gfiSearch2.data.items[i].repository_url, requestAuthConfig);
+                console.log(repo);
+                // get repo name
+                const repoName = repo.data.full_name;
+                const owner = repo.data.owner.login;
+                const name = repo.data.name;
+                const issueReadMe = await axios.get(`https://api.github.com/repos/${owner}/${name}/readme`, requestAuthConfig);
+                console.log(window.atob(issueReadMe.data.content));
+                // console.log(repoName);
+                // get repo topics 
+                const topics = repo.data.topics;
+                gfiArray.push({
+                    name: repoName,
+                    url: gfiSearch2.data.items[i].html_url,
+                    title: gfiSearch2.data.items[i].title,
+                    score: gfiSearch2.data.items[i].score,
+                    topics: topics
+                });
+            }
         }
 
         setGoodIssues({
             issues: gfiArray,
             topics: topicArray
-
         });
-        const string = readmes[1].replaceAll('\n', "");
-        await getStuff(string);
+
+        setLoading(prev => !prev)
         setDone(true);
-
     }
-
     return (
         <Flex h="100vh" align="center" direction="column" py="25px">
-            <Button onClick={handleClick} p="20px">
-                {loading ? <Text> Analyze </Text> :
-                    <Spinner
-                        thickness='4px'
-                        speed='0.65s'
-                        emptyColor='gray.200'
-                        color='blue.500'
-                        size='md'
-                    />
-                }
+            <Button p="25px"onClick={() => setStyle(prev => !prev)}>
+                change style
             </Button>
+            {done ? null :
+                <Button onClick={handleClick} p="20px">
+                    {loading ? <Text> Analyze </Text> :
+                        <Spinner
+                            thickness='4px'
+                            speed='0.65s'
+                            emptyColor='gray.200'
+                            color='blue.500'
+                            size='md'
+                        />
+                    }
+                </Button>
+            }
+
             {done ?
                 < Flex border="1px" direction="column" p="0px" gap="10px" >
                     {goodIssues.issues.map((item) => {
-                        return (<Poster key={item.url} repoName={item.name} topics={item.topics} repoUrl={item.url} title={item.title} />);
+                        return (<Poster style={style} key={item.url} repoName={item.name} topics={item.topics} repoUrl={item.url} title={item.title} score={item.score} />);
                     })}
                     {/* <Poster repoName={goodIssues.issues[0].name} topics={goodIssues.topics[0]} repoUrl={goodIssues.issues[0].url} title={goodIssues.issues[0].title} />
                         <Poster repoName={goodIssues.issues[1].name} topics={goodIssues.topics[1]} repoUrl={goodIssues.issues[1].url} title={goodIssues.issues[1].title} />

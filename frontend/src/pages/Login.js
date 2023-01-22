@@ -15,9 +15,10 @@ const Login = () => {
                     <Flex fontSize="24px">
                         Log In
                     </Flex>
+                    <Image className="buggy" src="https://i.ibb.co/S6RjyXv/cowboy-bug.png" />
                     <Button onClick={getAuth} >
                         <Flex gap="15px" justify="center" align="center">
-                            <FaGithub size={20}/>
+                            <FaGithub size={20} />
                             <Text> Login with Github </Text>
                         </Flex>
                     </Button>

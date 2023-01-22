@@ -32,6 +32,7 @@ app.get("/", async (req, res) => {
     try {
         const result = await getEntities(headerInput);
         console.log(result);
+        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
         res.json(result);
     } catch (err) {
         console.log(err);
