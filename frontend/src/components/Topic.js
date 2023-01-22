@@ -12,7 +12,8 @@ const Topic = (props) => {
                 padding={1.8}
                 paddingRight={3}
                 paddingLeft={3}
-            >
+            >   border: 1px
+
                 {props.topicName}
             </Tag>
         </Flex >
